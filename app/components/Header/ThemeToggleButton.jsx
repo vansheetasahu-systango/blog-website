@@ -29,7 +29,7 @@ export default function ThemeToggleButton() {
                 {theme === 'light' ? 'Light Mode' : 'Dark Mode'}
             </button>
 
-            {/* Scoped styles for theme */}
+             
             <style jsx global>{`
                 :root {
                     --background-color: white;
@@ -50,3 +50,4 @@ export default function ThemeToggleButton() {
         </>
     );
 }
+ 

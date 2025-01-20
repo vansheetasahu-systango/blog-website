@@ -3,7 +3,7 @@ import styles from './BlogCard.module.css';
 export default function BlogCard({ title, description, author, date, thumbnail }) {
     return (
         <div className={styles.card}>
-            <img src={thumbnail} alt={title} className={styles.thumbnail} />
+             <img src={thumbnail || "https://via.placeholder.com/150"} alt={title} className={styles.thumbnail} />
             <div className={styles.content}>
                 <h2 className={styles.title}>{title}</h2>
                 <p className={styles.description}>{description}</p>

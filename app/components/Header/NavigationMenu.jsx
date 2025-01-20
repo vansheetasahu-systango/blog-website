@@ -12,10 +12,10 @@ export default function NavigationMenu() {
                     Home
                 </li>
             </Link>
-            <Link href="/categories">
+            <Link href="/about">
                 <li className="flex items-center gap-2">
                     <List />
-                    Categories
+                     About Us
                 </li>
             </Link>
             <Link href="/contact">

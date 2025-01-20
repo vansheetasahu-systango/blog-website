@@ -1,19 +1,21 @@
-import BlogDetails from "@/app/components/BlogDetails";
-import { fetchBlogs } from "@/app/lib/utils/fetchBlogs";
+import BlogDetails from "../../components/Blog/BlogDetails";
+import styles from "./Page.module.css";
+
+// Fetch blog details based on the dynamic ID
+async function fetchBlogDetails(id) {
+  const res = await fetch(`https://6787e220c4a42c9161089db1.mockapi.io/blogs/${id}`, { cache: "no-store" });
+  if (!res.ok) {
+    throw new Error("Failed to fetch blog details");
+  }
+  return res.json();
+}
 
 export default async function BlogPage({ params }) {
-  const { id } = params;
-
-  // Fetch all blogs or a specific blog
-  const blogs = await fetchBlogs();
-  const blog = blogs.find((blog) => blog.id === id);
-
-  if (!blog) {
-    return <div>Blog not found</div>;
-  }
+  const { id } =await params;
+  const blog = await fetchBlogDetails(id);
 
   return (
-    <div>
+    <div className={styles.container}>
       <BlogDetails blog={blog} />
     </div>
   );
