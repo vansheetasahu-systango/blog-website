@@ -5,4 +5,3 @@ export async function getAllBlogs() {
     }
     return await res.json();
   }
-  

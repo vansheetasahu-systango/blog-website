@@ -15,6 +15,7 @@ export default function Header() {
                 <SearchButton />
                 <ThemeToggleButton />
                 <AuthContextProvider>
+                
                     <LoginButton />
                 </AuthContextProvider>
             </div>
