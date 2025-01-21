@@ -31,6 +31,7 @@ export default function AuthContextProvider({ children }) {
         setIsLoading(true);
         try {
             const result = await signInWithPopup(auth, new GoogleAuthProvider());
+            localStorage.setItem('user','loggedIn')
             setUser(result.user); // Update the user state directly
         } catch (error) {
             setError(error?.message);

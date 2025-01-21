@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
 import { Mail, Phone } from "lucide-react";
 import { MapPin } from "lucide-react";
+import Header from "../components/Header/Header";
 
 export default function ContactPage() {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
@@ -22,6 +23,8 @@ export default function ContactPage() {
   };
 
   return (
+    <> 
+    <Header/>
     <div className="p-8 bg-gray-50">
       <h1 className="text-3xl font-bold text-gray-800 text-center mb-8">Contact Us</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -117,5 +120,6 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

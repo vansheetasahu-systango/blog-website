@@ -1,8 +1,10 @@
 /* Modified file: app/page.jsx */
 import BlogList from "./components/Blog/BlogList";
 import Link from "next/link";
-import ShareBlog from "./components/Blog/ShareBlog";
-
+import ShareBlog from "./blog/create/ShareBlog";
+import AuthContextProvider from "./lib/contexts/AuthContext";
+// import { useEffect } from "react";
+import Header from "./components/Header/Header";
 async function fetchBlogs(searchQuery = "") {
   const res = await fetch("https://6787e220c4a42c9161089db1.mockapi.io/blogs", {
     cache: "no-store",
@@ -23,12 +25,19 @@ async function fetchBlogs(searchQuery = "") {
 export default async function Home({ searchParams }) {
   const searchQuery = searchParams?.query || "";
   const blogs = await fetchBlogs(searchQuery);
+  //  useEffect(()=>{
 
+  //  },[])
   return (
     <main className="container mx-auto px-4 py-6">
       <div className="flex justify-between items-center mb-6">
-         <ShareBlog/>
+      <Header />
+
+      
+         
+        
       </div>
+      <ShareBlog/>
       <h1 className="text-2xl font-bold mb-4">Welcome to the Blog Website</h1>
 
       <BlogList blogs={blogs} />

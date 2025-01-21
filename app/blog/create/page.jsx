@@ -1,13 +1,13 @@
-"use client";
+ "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function CreateBlogPage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [author, setAuthor] = useState("");
-  const [thumbnail, setThumbnail] = useState(""); // Changed to accept URL
+  const [thumbnail, setThumbnail] = useState(""); // Accept URL
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
 
@@ -24,9 +24,13 @@ export default function CreateBlogPage() {
     return null;
   };
 
+  const handleBack = () => {
+    window.history.back(); // Go back to the previous page
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Thumbnail URL being sent:", thumbnail); // Add this log to inspect the URL
+    console.log("Thumbnail URL being sent:", thumbnail);
     const error = validateForm();
     if (error) {
       setErrorMessage(error);
@@ -38,7 +42,7 @@ export default function CreateBlogPage() {
       content,
       author,
       date: new Date().toISOString(),
-      image: thumbnail || "https://via.placeholder.com/150", // Use provided URL or fallback to placeholder
+      image: thumbnail || "https://via.placeholder.com/150", // Use provided URL or fallback
     };
 
     try {
@@ -62,9 +66,19 @@ export default function CreateBlogPage() {
     }
   };
 
+  // Redirect to homepage if not logged in
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("user") === "loggedIn";
+    if (!isLoggedIn) {
+      alert("You are not logged in. Redirecting to the homepage...");
+      router.push("/"); // Redirect to the homepage
+      console.log(router);
+    }
+  }, [router]);
+
   return (
     <div className="container mx-auto px-4 py-6">
-      <h1 className="text-2xl font-bold mb-4">Create New Blog Post</h1>
+      <h1 className="text-2xl font-bold mb-4">Create new Blog Post</h1>
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -106,12 +120,20 @@ export default function CreateBlogPage() {
             className="border p-2 w-full"
           />
         </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Submit
-        </button>
+        <div className="flex justify-between items-center">
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+          >
+            Submit
+          </button>
+          <button
+            className="bg-gray-500 text-white px-4 py-2 rounded"
+            onClick={handleBack}
+          >
+            Back to Homepage
+          </button>
+        </div>
       </form>
     </div>
   );

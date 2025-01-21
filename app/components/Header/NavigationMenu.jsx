@@ -21,7 +21,7 @@ export default function NavigationMenu() {
             <Link href="/contact">
                 <li className="flex items-center gap-2">
                     <MessageCircle />
-                    Contact Us
+                    Contact Us 
                 </li>
             </Link>
         </ul>
